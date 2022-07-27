@@ -1,6 +1,6 @@
 package com.github.dericksm.moviesinfoservice.service;
 
-import com.github.dericksm.moviesinfoservice.domain.model.MovieInfo;
+import com.github.dericksm.moviesinfoservice.domain.entity.MovieInfo;
 import com.github.dericksm.moviesinfoservice.exception.ResourceNotFoundException;
 import com.github.dericksm.moviesinfoservice.repository.MovieInfoRepository;
 import javax.validation.Valid;
@@ -32,7 +32,7 @@ public class MovieInfoService {
 
     public Mono<MovieInfo> findById(@NotBlank String id) {
         return movieInfoRepository.findById(id)
-            .switchIfEmpty(Mono.error(new ResourceNotFoundException(String.format("MovieInfo with id %s wasn't found", id))));
+            .switchIfEmpty(Mono.error(new ResourceNotFoundException(id)));
     }
 
     public Mono<MovieInfo> update(@NotEmpty String id, @Valid MovieInfo movieInfo) {

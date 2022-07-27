@@ -3,7 +3,7 @@ package com.github.dericksm.moviesinfoservice.integration;
 import com.github.dericksm.moviesinfoservice.domain.dto.MovieInfoRequestDTO;
 import com.github.dericksm.moviesinfoservice.domain.dto.MovieInfoResponseDTO;
 import com.github.dericksm.moviesinfoservice.domain.dto.MovieInfoUpdateRequestDTO;
-import com.github.dericksm.moviesinfoservice.domain.model.MovieInfo;
+import com.github.dericksm.moviesinfoservice.domain.entity.MovieInfo;
 import com.github.dericksm.moviesinfoservice.repository.MovieInfoRepository;
 import java.time.OffsetDateTime;
 import java.util.Arrays;

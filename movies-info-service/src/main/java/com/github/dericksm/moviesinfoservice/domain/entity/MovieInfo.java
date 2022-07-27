@@ -1,4 +1,4 @@
-package com.github.dericksm.moviesinfoservice.domain.model;
+package com.github.dericksm.moviesinfoservice.domain.entity;
 
 import java.time.OffsetDateTime;
 import java.util.List;
