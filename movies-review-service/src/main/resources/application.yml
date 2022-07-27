@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      uri:
+      database:
+
+server:
+  port: 8081
