@@ -11,7 +11,7 @@ import lombok.Data;
 public class ReviewRequestDTO {
 
     @NotBlank
-    private Long movieInfoId;
+    private String movieInfoId;
 
     @NotBlank
     private String comment;

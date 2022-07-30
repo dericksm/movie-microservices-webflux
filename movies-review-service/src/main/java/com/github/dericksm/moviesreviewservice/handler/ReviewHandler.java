@@ -17,14 +17,18 @@ public class ReviewHandler {
 
     private final ReviewRepository reviewRepository;
     private final ReviewMapper reviewMapper;
+    private final ValidatorRequestHandler validatorRequestHandler;
 
-    public ReviewHandler(ReviewRepository reviewRepository, ReviewMapper reviewMapper) {
+    public ReviewHandler(ReviewRepository reviewRepository, ReviewMapper reviewMapper,
+        ValidatorRequestHandler validatorRequestHandler) {
         this.reviewRepository = reviewRepository;
         this.reviewMapper = reviewMapper;
+        this.validatorRequestHandler = validatorRequestHandler;
     }
 
     public Mono<ServerResponse> save(ServerRequest request) {
         return request.bodyToMono(ReviewRequestDTO.class)
+            .flatMap(validatorRequestHandler::requireValidBody)
             .map(reviewMapper::toReview)
             .flatMap(reviewRepository::save)
             .map(reviewMapper::toReviewResponse)
@@ -33,8 +37,9 @@ public class ReviewHandler {
     }
 
     public Mono<ServerResponse> findAll() {
-        var reviewFlux = reviewRepository.findAll().map(reviewMapper::toReviewResponse);
-        return ServerResponse.ok().body(reviewFlux, ReviewResponseDTO.class);
+        return ServerResponse.ok()
+            .body(reviewRepository.findAll()
+                    .map(reviewMapper::toReviewResponse), ReviewResponseDTO.class);
     }
 
     public Mono<ServerResponse> findById(ServerRequest request) {
